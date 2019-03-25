@@ -1,20 +1,16 @@
 import React from "react";
-import { Meteor } from "meteor/meteor";
-import { Accounts } from "meteor/accounts-base";
-// import { createBrowserHistory } from "history";
-export default class Link extends React.Component {
-  onClickLogout = () => {
-    Meteor.logout(err => {
-      console.log("logged out");
-      console.log(err);
-    });
-  };
-  render() {
-    return (
-      <div>
-        <h1>Links</h1>
-        <button onClick={this.onClickLogout}>Logout</button>
-      </div>
-    );
-  }
-}
+import FilterLinks from "./FilterLinks";
+
+import LinksList from "./LinksList";
+import PrivateHeader from "./PrivateHeader";
+import AddLink from "./AddLink";
+export default () => (
+  <div>
+    <PrivateHeader title="Your Links" />
+    <FilterLinks />
+
+    <AddLink />
+
+    <LinksList />
+  </div>
+);

@@ -1,57 +1,21 @@
 import { Meteor } from "meteor/meteor";
-import ReactDOM from "react-dom";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import ReactDOM from "react-dom";
 import { Tracker } from "meteor/tracker";
-import Signup from "../imports/ui/components/Signup";
-import NotFound from "../imports/ui/components/NotFound";
-import Login from "../imports/ui/components/Login";
-
-import Link from "../imports/ui/components/Link";
-// Meteor.startup(() => {
-//   console.log("here");
-
-const authenticatedPages = ["/link"];
-const unauthenticatedPages = ["/", "/signup"];
-const history = createBrowserHistory();
-
+import { Routes, authenticatePage } from "../imports/routes/routes";
+import { Session } from "meteor/session";
+import "../imports/startup/simpl-schema-configuration";
+// import { Links } from "../imports/api/links";
 Tracker.autorun(() => {
   const isAuthenticated = !!Meteor.userId();
-  console.log("Authenticated " + isAuthenticated);
-
-  const currentPage = history.location.pathname;
-  console.log("CurrentPage " + currentPage);
-
-  isAuthenticatedPage = authenticatedPages.includes(currentPage);
-  isUnAuthetnicatedPage = unauthenticatedPages.includes(currentPage);
-
-  if (isAuthenticated && isUnAuthetnicatedPage) {
-    history.push("/link");
-    history.go();
-  }
-  if (!isAuthenticated && isAuthenticatedPage) {
-    history.push("/");
-    history.go();
-  }
+  authenticatePage(isAuthenticated);
 });
-onEnter = () => {
-  if (Meteor.userId()) {
-    console.log("going");
-    history.push("/link");
-    history.go();
-  }
-};
-const routes = (
-  <Router>
-    <Switch>
-      <Route exact path="/" component={Login} onEnter={onEnter} />
 
-      <Route path="/signup" component={Signup} onEnter={onEnter} />
-      <Route path="/link" component={Link} onEnter={onEnter} />
-      <Route component={NotFound} onEnter={onEnter} />
-    </Switch>
-  </Router>
-);
-ReactDOM.render(routes, document.getElementById("render-app"));
+// Tracker.autorun(() => {
+//   const links = Links.find().fetch();
+//   console.log(links);
 // });
+Meteor.startup(() => {
+  Session.set("showHidden", true);
+  ReactDOM.render(<Routes />, document.getElementById("render-app"));
+});

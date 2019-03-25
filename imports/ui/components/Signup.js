@@ -14,11 +14,18 @@ class Signup extends Component {
     let email = this.refs.email.value.trim();
     console.log(email);
     let password = this.refs.password.value.trim();
-    console.log(password);
 
+    if (password.length < 9) {
+      return this.setState({
+        error: "Password must be greater than 9 charcters"
+      });
+    }
     Accounts.createUser({ email, password }, err => {
       console.log(err);
-      if (err) this.setState({ error: err.message });
+      if (err) this.setState({ error: err.reason });
+      else {
+        this.setState({ error: "" });
+      }
     });
   };
   render() {
@@ -26,7 +33,7 @@ class Signup extends Component {
       <div>
         <h1>Signup to Short Lnk</h1>
         {this.state.error ? <p>{this.state.error}</p> : undefined}
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} noValidate>
           <input type="email" ref="email" name="email" placeholder="Email" />
           <input
             type="password"
