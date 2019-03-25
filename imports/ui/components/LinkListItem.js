@@ -29,25 +29,43 @@ class LinkListItem extends Component {
     this.clipboard.destroy();
   }
   renderStats = (visitedCount, lastVisited) => {
-    return <p>{}</p>;
+    return (
+      <p className="item__message">
+        {visitedCount} {visitedCount !== 1 ? "visits" : "visit"}{" "}
+        {lastVisited ? " (" + moment(lastVisited).fromNow() + ")" : undefined}
+      </p>
+    );
   };
   render() {
     let { _id, url, shortUrl, visible, visitedCount, lastVisited } = this.props;
     return (
-      <div>
-        <p>{url}</p>
-        <p>{shortUrl}</p>
-        <p>{visible.toString()}</p>
-        <a href={shortUrl} target="_blank">
-          Visit Link
-        </a>
+      <div className="item">
+        <h2>{url}</h2>
+        <p className="item__message">{shortUrl}</p>
         {this.renderStats(visitedCount, lastVisited)}
-        <button ref="copy" data-clipboard-text={shortUrl}>
-          {this.state.copy ? "Copied" : "Copy"}
-        </button>
-        <button onClick={() => this.toggleLink(_id, !visible)}>
-          {visible ? "Hide" : "Show"}
-        </button>
+        <div>
+          <a
+            href={shortUrl}
+            target="_blank"
+            className="button button--pill button--link"
+          >
+            Visit
+          </a>
+
+          <button
+            ref="copy"
+            data-clipboard-text={shortUrl}
+            className="button button--pill"
+          >
+            {this.state.copy ? "Copied" : "Copy"}
+          </button>
+          <button
+            onClick={() => this.toggleLink(_id, !visible)}
+            className="button button--pill"
+          >
+            {visible ? "Hide" : "Show"}
+          </button>
+        </div>
       </div>
     );
   }

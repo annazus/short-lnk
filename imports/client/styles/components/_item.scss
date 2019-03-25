@@ -1,0 +1,15 @@
+.item {
+  background: $item-bg;
+  border: 1px solid $item-border;
+  margin-bottom: $spacing;
+  padding: $spacing;
+}
+.item__message {
+  color: $item-text-color;
+}
+.item__status--message {
+  color: $item-text-color;
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+}

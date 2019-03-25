@@ -16,11 +16,12 @@ export default class FilterLinks extends Component {
   render() {
     return (
       <form>
-        <label>
+        <label className="checkbox">
           <input
             type="checkbox"
             name="showHidden"
             id="showHidden"
+            className="checkbox__box"
             defaultChecked={!!Session.get("showHidden")}
             onChange={this.toggleShowHidden}
           />

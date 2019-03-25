@@ -26,7 +26,10 @@ export default class PrivateHeader extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.setState({ isOpen: true })}>
+        <button
+          className="button"
+          onClick={() => this.setState({ isOpen: true })}
+        >
           + Add Link
         </button>
         <Modal
@@ -38,9 +41,16 @@ export default class PrivateHeader extends Component {
           onRequestClose={() => {
             this.setState({ url: "", isOpen: false, error: undefined });
           }}
+          className="boxed-view__box"
+          overlayClassName="boxed-view boxed-view--modal"
         >
+          <h1>Add Link</h1>
           <p>{this.state.error}</p>
-          <form onSubmit={this.addLink} noValidate={true}>
+          <form
+            onSubmit={this.addLink}
+            noValidate={true}
+            className="boxed-view__form"
+          >
             <input
               type="text"
               name="url"
@@ -48,13 +58,15 @@ export default class PrivateHeader extends Component {
               placeholder="URL"
               onChange={this.onChange}
             />
-            <button>Add Link</button>
+            <button className="button">Add Link</button>
+            <button
+              type="button"
+              className="button button--secondary"
+              onClick={() => this.setState({ isOpen: false, error: undefined })}
+            >
+              Cancel
+            </button>
           </form>
-          <button
-            onClick={() => this.setState({ isOpen: false, error: undefined })}
-          >
-            Cancel
-          </button>
         </Modal>
       </div>
     );

@@ -6,11 +6,11 @@ import PrivateHeader from "./PrivateHeader";
 import AddLink from "./AddLink";
 export default () => (
   <div>
-    <PrivateHeader title="Your Links" />
-    <FilterLinks />
-
-    <AddLink />
-
-    <LinksList />
+    <PrivateHeader title="Short Lnk" />
+    <div className="page-content">
+      <FilterLinks />
+      <AddLink />
+      <LinksList />
+    </div>
   </div>
 );

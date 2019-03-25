@@ -30,20 +30,26 @@ class Signup extends Component {
   };
   render() {
     return (
-      <div>
-        <h1>Signup to Short Lnk</h1>
-        {this.state.error ? <p>{this.state.error}</p> : undefined}
-        <form onSubmit={this.onSubmit} noValidate>
-          <input type="email" ref="email" name="email" placeholder="Email" />
-          <input
-            type="password"
-            ref="password"
-            name="password"
-            placeholder="Password"
-          />
-          <button>Create Account</button>
-        </form>
-        <Link to="/">Have an account?</Link>
+      <div className="boxed-view">
+        <div className="boxed-view__box">
+          <h1>Signup to Short Lnk</h1>
+          {this.state.error ? <p>{this.state.error}</p> : undefined}
+          <form
+            onSubmit={this.onSubmit}
+            noValidate
+            className="boxed-view__form"
+          >
+            <input type="email" ref="email" name="email" placeholder="Email" />
+            <input
+              type="password"
+              ref="password"
+              name="password"
+              placeholder="Password"
+            />
+            <button className="button">Create Account</button>
+          </form>
+          <Link to="/">Have an account?</Link>
+        </div>
       </div>
     );
   }
