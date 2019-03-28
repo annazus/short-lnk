@@ -26,7 +26,7 @@ export default class LinksList extends Component {
   }
 
   componentWillUnmount() {
-    this.state.tracker.stop();
+    this.tracker.stop();
   }
   renderLinks = () => {
     if (this.state.links.length === 0) {

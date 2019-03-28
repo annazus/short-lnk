@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Accounts } from "meteor/accounts-base";
 class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: ""
+      error: "",
+      isLoggedIn: false
     };
   }
 
@@ -24,12 +25,14 @@ class Signup extends Component {
       console.log(err);
       if (err) this.setState({ error: err.reason });
       else {
-        this.setState({ error: "" });
+        this.setState({ error: "", isLoggedIn: true });
       }
     });
   };
   render() {
-    return (
+    return this.state.isLoggedIn ? (
+      <Redirect to="/link" />
+    ) : (
       <div className="boxed-view">
         <div className="boxed-view__box">
           <h1>Signup to Short Lnk</h1>

@@ -32,7 +32,9 @@ class LinkListItem extends Component {
     return (
       <p className="item__message">
         {visitedCount} {visitedCount !== 1 ? "visits" : "visit"}{" "}
-        {lastVisited ? " (" + moment(lastVisited).fromNow() + ")" : undefined}
+        {lastVisited
+          ? " (Last visited " + moment(lastVisited).fromNow() + ")"
+          : undefined}
       </p>
     );
   };

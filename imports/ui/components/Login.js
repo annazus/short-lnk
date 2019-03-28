@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { error: "" };
+    this.state = { error: "", loggedIn: false };
   }
 
   onSubmit = e => {
@@ -17,12 +16,14 @@ export default class Login extends Component {
         this.setState({ error: "Unable to login - check email and password." });
         // console.log(err);
       } else {
-        this.setState({ error: "" });
+        this.setState({ error: "", loggedIn: true });
       }
     });
   };
   render() {
-    return (
+    return this.state.loggedIn ? (
+      <Redirect to="/link" />
+    ) : (
       <div className="boxed-view">
         <div className="boxed-view__box">
           <h1>Short Lnk</h1>
